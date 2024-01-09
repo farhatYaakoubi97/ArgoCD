@@ -1,22 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: beehive-app-deployment
+  name: nginx-deployment
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
-      app: beehive-app  # Update to "elab-app" to match the labels in the template
+      app: nginx
   template:
     metadata:
       labels:
-        app: beehive-app  # Match the selector labels
+        app: nginx
     spec:
       containers:
-        - name: beehive-app-container
-          image: bahakchiche/beehive-front:latest
-          ports:
-            - containerPort: 8000
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+
 
 
 ---
@@ -24,12 +25,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: beehive-app-service
+  name: nginx-service
 spec:
   selector:
-    app: beehive-app
+    app: nginx
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 8000
+      targetPort: 80
   type: LoadBalancer
+
