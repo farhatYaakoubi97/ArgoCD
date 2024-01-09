@@ -16,7 +16,7 @@ spec:
         - name: beehive-app-container
           image: bahakchiche/beehive-front:latest
           ports:
-            - containerPort: 8000
+            - containerPort: 8080
 
 
 ---
@@ -30,6 +30,6 @@ spec:
     app: beehive-app
   ports:
     - protocol: TCP
-      port: 80
+      port: 8020
       targetPort: 8000
   type: LoadBalancer
