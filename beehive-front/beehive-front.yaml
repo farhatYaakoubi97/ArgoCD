@@ -30,6 +30,6 @@ spec:
     app: beehive-app
   ports:
     - protocol: TCP
-      port: 8020
+      port: 8030
       targetPort: 3000
   type: LoadBalancer
