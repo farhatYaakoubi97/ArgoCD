@@ -1,0 +1,51 @@
+---
+- name: Deploy Minikube
+  hosts: server1
+  become: true
+
+  tasks:
+    - name: Create a new user
+      user:
+        name: your_new_user
+        state: present
+        groups: sudo
+        append: yes
+        shell: /bin/bash
+
+    - name: Set permissions on /run/user
+      become_user: root
+      become: yes
+      file:
+        path: /run/user
+        owner: root
+        group: your_new_user  # Replace with the actual group of your_new_user
+        mode: '1775'
+        recurse: yes
+
+    - name: Add the user to the 'docker' group
+      become_user: root
+      become: yes
+      user:
+        name: your_new_user
+        groups: docker
+        append: yes
+
+    - name: Install necessary packages
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - docker.io
+        - curl
+
+    - name: Download and install Minikube
+      shell: "curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/"
+      args:
+        creates: /usr/local/bin/minikube
+
+    - name: Start Minikube 
+      become_user: your_new_user
+      shell: "minikube start --driver=docker"
+      args:
+        executable: /bin/bash
+

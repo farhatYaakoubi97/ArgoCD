@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: beehive-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: beehive-app  # Update to "elab-app" to match the labels in the template
+  template:
+    metadata:
+      labels:
+        app: beehive-app  # Match the selector labels
+    spec:
+      containers:
+        - name: beehive-app-container
+          image: ihebkchiche/beehive:latest
+          ports:
+            - containerPort: 8000
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: beehive-app-service
+spec:
+  selector:
+    app: beehive-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+  type: LoadBalancer
