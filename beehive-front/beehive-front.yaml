@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: beehive-app-container
-          image: bahakchiche/beehive-front:latest
+          image: ihebkchiche/beehive-front:latest
           ports:
             - containerPort: 3000
 
