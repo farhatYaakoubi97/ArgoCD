@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: beehive-app-deployment
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: beehive-app  # Update to "elab-app" to match the labels in the template
