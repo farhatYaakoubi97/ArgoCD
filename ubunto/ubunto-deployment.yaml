@@ -15,7 +15,8 @@ spec:
       containers:
       - name: alpine-container
         image: alpine:latest
-        command: ["sleep", "infinity"]
+        command: ["ash", "-c", "sleep infinity"]
+
 
 ---
 
