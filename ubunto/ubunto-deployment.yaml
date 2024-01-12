@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ubunto
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ubunto
+  template:
+    metadata:
+      labels:
+        app: ubunto
+    spec:
+      containers:
+      - name: nginx
+        image: ubunto:latest
+        ports:
+        - containerPort: 88
+
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ubunto
+spec:
+  selector:
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 8898
+      targetPort: 88
+  type: LoadBalancer
+
