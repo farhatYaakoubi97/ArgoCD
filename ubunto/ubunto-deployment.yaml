@@ -13,7 +13,7 @@ spec:
         app: ubunto
     spec:
       containers:
-      - name: nginx
+      - name: ubuntu
         image: ubunto:latest
         ports:
         - containerPort: 88
