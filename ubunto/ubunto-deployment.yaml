@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: ubuntu
-        image: alpine:latest
+        image: ubuntu:latest
         ports:
         - containerPort: 88
 
@@ -28,7 +28,7 @@ metadata:
   name: ubunto
 spec:
   selector:
-    app: nginx
+    app: ubunto
   ports:
     - protocol: TCP
       port: 8898
